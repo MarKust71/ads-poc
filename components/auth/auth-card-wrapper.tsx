@@ -1,5 +1,3 @@
-'use client'
-
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { AuthCardHeader } from '@/components/auth/auth-card-header'
 
@@ -7,14 +5,10 @@ type CardWrapperProps = {
   children: React.ReactNode
   headerLabel: string
   subHeaderLabel?: string
-  backButtonLabel: string
-  backButtonHref: string
 }
 
 export const AuthCardWrapper = ({
   children,
-  backButtonHref,
-  backButtonLabel,
   headerLabel,
   subHeaderLabel,
 }: CardWrapperProps) => {
@@ -26,7 +20,9 @@ export const AuthCardWrapper = ({
         {subHeaderLabel && <p className={'text-sm'}>{subHeaderLabel}</p>}
       </CardHeader>
 
-      <CardContent>{children}</CardContent>
+      <CardContent>
+        <div className={'flex flex-col'}>{children}</div>
+      </CardContent>
     </Card>
   )
 }
