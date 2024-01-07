@@ -2,7 +2,7 @@
 
 import { AuthCardWrapper } from '@/components/auth/auth-card-wrapper'
 import { useForm } from 'react-hook-form'
-import { LoginSchema } from '@/schemas'
+import { RegisterSchema } from '@/schemas'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -15,40 +15,46 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { FormError } from '@/components/form-error'
-import { login } from '@/actions/login'
 import { useState, useTransition } from 'react'
+import { register } from '@/actions/register'
 import { AuthBackButton } from '@/components/auth/auth-back-button'
+import { useRouter } from 'next/navigation'
 
-export const AuthLoginForm = () => {
+export const AuthRegisterForm = () => {
   const [isPending, startTrasition] = useTransition()
+  const router = useRouter()
 
   const [error, setError] = useState('')
 
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof RegisterSchema>>({
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
       email: '',
       password: '',
     },
   })
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError('')
     startTrasition(() => {
-      login(values).then((response) => {
+      register(values).then((response) => {
         setError(response?.error || '')
+
+        if (response?.success) {
+          router.push('/auth/login')
+        }
       })
     })
   }
 
-  const backButtonLabel: string = 'Forgot password?'
-  const backButtonHref: string = '/auth/reset'
+  const backButtonLabel = 'Already have an account?'
+  const backButtonHref = '/auth/login'
 
   return (
     <AuthCardWrapper
-      headerLabel={'Welcome!'}
+      headerLabel={'Request access to Qiwa Decision Support Center'}
       subHeaderLabel={
-        'Enter your email address and password to get access to your account'
+        'Enter your working email to request access to Qiwa Decision Support Center. You’ll be notified by email as soon as the request is approved.'
       }
     >
       <>
@@ -105,7 +111,7 @@ export const AuthLoginForm = () => {
             </div>
 
             <Button type={'submit'} className={'w-full'} disabled={isPending}>
-              Login
+              Send request
             </Button>
           </form>
         </Form>
