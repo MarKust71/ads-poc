@@ -24,7 +24,7 @@ const DashboardDemoPage = async () => {
 
       <div className={'mt-5'} id={'embedding-dossier-container'}></div>
 
-      <Mstr demo />
+      <Mstr />
     </>
   )
 }
