@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { runCodeLibrary } from '@/lib/mstr/library'
-import { runCodeDossier } from '@/lib/mstr/dossier'
+// import { runCodeDossier } from '@/lib/mstr/dossier'
 import { runCodeLibraryDemo } from '@/lib/mstr/library-demo'
 
 export const Mstr = ({ demo }: { demo?: boolean }) => {
@@ -24,6 +24,7 @@ export const Mstr = ({ demo }: { demo?: boolean }) => {
         )
       }
 
+      /*
       try {
         await runCodeDossier()
       } catch (error) {
@@ -35,7 +36,9 @@ export const Mstr = ({ demo }: { demo?: boolean }) => {
           }
         )
       }
+*/
     }
+
     run()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
