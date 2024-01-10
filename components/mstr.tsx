@@ -1,16 +1,34 @@
 'use client'
 
 import { useEffect } from 'react'
-import { runCode } from '@/lib/mstr'
+import { runCodeLibrary } from '@/lib/mstr/library'
+import { runCodeDossier } from '@/lib/mstr/dossier'
+import { runCodeLibraryDemo } from '@/lib/mstr/library-demo'
 
-export const Mstr = () => {
+export const Mstr = ({ demo }: { demo?: boolean }) => {
   useEffect(() => {
     const run = async () => {
       try {
-        await runCode()
+        if (demo) {
+          await runCodeLibraryDemo()
+        } else {
+          await runCodeLibrary()
+        }
       } catch (error) {
         console.log(
-          '%c runCode error: ',
+          '%c runCodeLibrary error: ',
+          'color: black; background-color: yellow',
+          {
+            error,
+          }
+        )
+      }
+
+      try {
+        await runCodeDossier()
+      } catch (error) {
+        console.log(
+          '%c runCodeDossier error: ',
           'color: black; background-color: yellow',
           {
             error,
@@ -19,7 +37,8 @@ export const Mstr = () => {
       }
     }
     run()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return <></>
+  return false
 }

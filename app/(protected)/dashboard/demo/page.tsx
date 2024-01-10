@@ -1,7 +1,7 @@
 import { auth, signOut } from '@/auth'
 import { Mstr } from '@/components/mstr'
 
-const DashboardPage = async () => {
+const DashboardDemoPage = async () => {
   const session = await auth()
 
   return (
@@ -24,9 +24,9 @@ const DashboardPage = async () => {
 
       <div className={'mt-5'} id={'embedding-dossier-container'}></div>
 
-      <Mstr />
+      <Mstr demo />
     </>
   )
 }
 
-export default DashboardPage
+export default DashboardDemoPage

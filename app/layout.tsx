@@ -21,7 +21,8 @@ export default function RootLayout({
         <script
           type="text/javascript"
           src={
-            'https://demo.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js'
+            // 'https://demo.microstrategy.com/MicroStrategyLibrary/javascript/embeddinglib.js'
+            'http://192.168.80.57:8080/MicroStrategyLibrary/javascript/embeddinglib.js'
           }
         ></script>
         <title>ADE PoC</title>
